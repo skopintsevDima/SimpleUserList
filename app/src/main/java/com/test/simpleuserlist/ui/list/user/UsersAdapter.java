@@ -13,9 +13,11 @@ import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
     private List<User> mItems;
+    private UserItemListener mUserItemListener;
 
-    public UsersAdapter(List<User> items){
+    public UsersAdapter(List<User> items, UserItemListener userItemListener){
         mItems = items;
+        mUserItemListener = userItemListener;
     }
 
     public void setItems(List<User> users) {
@@ -34,7 +36,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UserViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder viewHolder, int position) {
         User item = mItems.get(position);
-        viewHolder.bind(item);
+        viewHolder.bind(item, mUserItemListener);
     }
 
     @Override

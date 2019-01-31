@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userPhotoView"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            tools:src="@drawable/dummy_photo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/nameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Name Surname"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/userPhotoView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/dobView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="1986-06-15"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/nameView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/cellHintView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cell_phone"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/dobView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/cellView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="+19847926478"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/cellHintView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/phoneHintView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/phone"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/cellView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/phoneView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="+19847926478"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/phoneHintView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/emailHintView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/phoneView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="16dp"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/emailView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="joe.doe@domen.com"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintTop_toBottomOf="@+id/emailHintView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

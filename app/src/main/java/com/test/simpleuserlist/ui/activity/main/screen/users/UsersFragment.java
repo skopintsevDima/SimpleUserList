@@ -8,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.test.simpleuserlist.R;
 import com.test.simpleuserlist.model.User;
+import com.test.simpleuserlist.ui.activity.main.screen.user_details.UserDetailsFragment;
 import com.test.simpleuserlist.ui.activity.main.screen.users.di.DaggerUsersComponent;
 import com.test.simpleuserlist.ui.activity.main.screen.users.di.UsersModule;
 import com.test.simpleuserlist.ui.base.BaseFragment;
@@ -21,9 +23,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 public class UsersFragment extends BaseFragment {
-    public static final String TAG = "UsersFragment";
-
     private RecyclerView mUsersListView;
+    private ProgressBar mLoadingView;
+
     private UsersAdapter mUsersAdapter;
 
     @Inject
@@ -36,6 +38,7 @@ public class UsersFragment extends BaseFragment {
                              @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_users, container, false);
         mUsersListView = rootView.findViewById(R.id.usersListView);
+        mLoadingView = rootView.findViewById(R.id.loadingView);
         return rootView;
     }
 
@@ -46,8 +49,8 @@ public class UsersFragment extends BaseFragment {
                 .usersModule(new UsersModule(this))
                 .build()
                 .inject(this);
+        parent.setTitle(R.string.home);
         initListView();
-        mViewModel.loadUsers().observe(this, this::updateList);
     }
 
     private void initListView() {
@@ -70,12 +73,35 @@ public class UsersFragment extends BaseFragment {
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<User> users = mViewModel.getUsers();
+        if (users.isEmpty()){
+            mLoadingView.setVisibility(View.VISIBLE);
+            mViewModel.loadUsers().observe(this, this::updateList);
+        } else updateList(users);
+    }
+
     private void updateList(List<User> users) {
+        mLoadingView.setVisibility(View.GONE);
         if (mUsersAdapter == null){
-            mUsersAdapter = new UsersAdapter(users);
+            mUsersAdapter = new UsersAdapter(users, position -> {
+                User user = mViewModel.getUser(position);
+                parent.getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, UserDetailsFragment.newInstance(user))
+                        .addToBackStack(null)
+                        .commit();
+            });
             mUsersListView.setAdapter(mUsersAdapter);
         } else {
             mUsersAdapter.setItems(users);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        mUsersAdapter = null;
+        super.onDestroyView();
     }
 }

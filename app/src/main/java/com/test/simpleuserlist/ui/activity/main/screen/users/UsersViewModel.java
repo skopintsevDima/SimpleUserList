@@ -37,6 +37,10 @@ public class UsersViewModel extends ViewModel {
         App.getUtilsComponent().inject(this);
     }
 
+    List<User> getUsers(){
+        return mUsers;
+    }
+
     @SuppressLint("CheckResult")
     LiveData<List<User>> loadUsers() {
         MutableLiveData<List<User>> liveUsers = new MutableLiveData<>();
@@ -97,5 +101,9 @@ public class UsersViewModel extends ViewModel {
             e.printStackTrace();
         }
         return parsedUsers;
+    }
+
+    User getUser(int position) {
+        return mUsers.get(position);
     }
 }
